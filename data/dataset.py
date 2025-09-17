@@ -43,7 +43,7 @@ def load_images_and_labels(img_dir, label_dir, label2idx):
     return img_infos
 
 
-class VOCDataset(Dataset):
+class CustomDataset(Dataset):
     def __init__(self, split, img_dir, label_dir):
         self.split = split
         self.img_dir = img_dir
@@ -58,7 +58,7 @@ class VOCDataset(Dataset):
         self.label2idx = {classes[idx]: idx for idx in range(len(classes))}
         self.idx2label = {idx: classes[idx] for idx in range(len(classes))}
         print(self.idx2label)
-        self.images_info = load_images_and_anns(img_dir, label_dir, self.label2idx)
+        self.images_info = load_images_and_labels(img_dir, label_dir, self.label2idx)
     
     def __len__(self):
         return len(self.images_info)
